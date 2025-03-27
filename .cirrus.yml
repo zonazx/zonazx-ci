@@ -1,0 +1,21 @@
+env:
+   creds: "ENCRYPTED[!08c0fcc8c57362806801c6ae5dfbd1abc5188bf3b0fdce7c5c3894c5d11ee5ae231809b50797f1006131a7d581380f18!]"
+   names: "ENCRYPTED[!e3a6ab8576f4d31f9923b36ee53bd96f8d507c1443baa238765a420df3e6e50f2d4e873f3a955af00d0186722ffab757!]"
+   email: "ENCRYPTED[!047bd9cc5bd11c7d5362caf6f1f5942b24d393a0490c96e39cf6c60052150ded771f9bcef34f103f504d67e9b8a495af!]"
+
+task:
+  name: "bread_maker"
+  container:
+      image: inok2341/anu:latest
+      cpu: 8
+      memory: 32G
+  env_setup_background_script:
+       - export DEBIAN_FRONTEND=noninteractive
+       - git config --global user.name "$names"
+       - git config --global user.email "$email"
+       - git config --global credential.helper store --file=~/.git-credentials
+       - echo "$creds" > ~/.git-credentials
+  run_script:
+      - git clone https://github.com/$names/bread_maker ~/workspace
+      - cd ~/workspace
+      - bash scripts/run.sh
