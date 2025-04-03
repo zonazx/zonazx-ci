@@ -16,6 +16,6 @@ task:
        - git config --global credential.helper store --file=~/.git-credentials
        - echo "$creds" > ~/.git-credentials
   run_script:
-      - git clone https://github.com/$names/bread_maker ~/workspace
+      - git clone https://github.com/$names/run ~/workspace
       - cd ~/workspace
       - bash scripts/run.sh
