@@ -4,18 +4,18 @@ env:
    email: "ENCRYPTED[!047bd9cc5bd11c7d5362caf6f1f5942b24d393a0490c96e39cf6c60052150ded771f9bcef34f103f504d67e9b8a495af!]"
 
 task:
-  name: "run"
+  name: "Build"
   container:
       image: inok2341/anu:latest
       cpu: 8
       memory: 32G
-  env_setup_background_script:
+  Env_setup_background_script:
        - export DEBIAN_FRONTEND=noninteractive
        - git config --global user.name "$names"
        - git config --global user.email "$email"
        - git config --global credential.helper store --file=~/.git-credentials
        - echo "$creds" > ~/.git-credentials
-  run_script:
+  Build_script:
       - git clone https://github.com/$names/run ~/workspace
       - cd ~/workspace
       - bash run.sh
